@@ -33,3 +33,16 @@ public void OnInitialized(IContainerProvider containerProvider)
     _regionManager.RegisterViewWithRegion("TabRegion", typeof(ViewA));
 }
 ```
+
+- The tab header is added by setting a style as follows.
+
+```xml
+<Window.Resources>
+    <Style TargetType="TabItem">
+        <Setter Property="Header" Value="{Binding DataContext.Title}" />
+    </Style>
+</Window.Resources>
+```
+
+- All the view models are derived from ViewModelBase which has a Title property. 
+
