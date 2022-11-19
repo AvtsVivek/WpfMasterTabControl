@@ -15,3 +15,5 @@ if (region == null)
 if (region.Views.Contains(tabItem.Content))
     region.Remove(tabItem.Content);
 ```
+
+- Prism automatically will remove the containing element, which in this case is the TabItem from the hosting control
