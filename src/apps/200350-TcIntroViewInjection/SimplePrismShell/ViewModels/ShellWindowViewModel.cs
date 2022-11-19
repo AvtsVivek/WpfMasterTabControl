@@ -1,4 +1,5 @@
-﻿using ModuleA.Views;
+﻿using DryIoc;
+using ModuleA.Views;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
@@ -21,19 +22,28 @@ namespace SimplePrismShell.ViewModels
         }
         public DelegateCommand<string> NavigateCommand { get; set; } = default!;
         private readonly IRegionManager _regionManager;
+        private readonly IContainer _container;
 
-        public ShellWindowViewModel(IRegionManager regionManager)
+        public ShellWindowViewModel(IRegionManager regionManager, IContainer container)
         {
             _regionManager = regionManager;
+            _container = container;
             WindowTitle = "Main Shell Window";
             NavigateCommand = new DelegateCommand<string>(Navigate);
         }
         void Navigate(string navigationPath)
         {
-            if(navigationPath == "ViewA")
-                _regionManager.RegisterViewWithRegion("TabRegion", typeof(ViewA));
+            var region = _regionManager.Regions["TabRegion"];
+            if (navigationPath == "ViewA")
+            {
+                var view = _container.Resolve<ViewA>();
+                region.Add(view);
+            }
             if (navigationPath == "ViewB")
-                _regionManager.RegisterViewWithRegion("TabRegion", typeof(ViewB));
+            {
+                var view = _container.Resolve<ViewB>();
+                region.Add(view);
+            }
         }
     }
 }
