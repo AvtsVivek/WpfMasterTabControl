@@ -1,8 +1,8 @@
 cd ../../..
 
-cd src/tasks/200540-TcRemovingView
+cd src/tasks/200560-TcPreventingClose
 
-cd src/apps/200540-TcRemovingTabView
+cd src/apps/200560-TcPreventingClose
 
 dotnet run --project ./SimplePrismShell/SimplePrismShell.csproj
 
