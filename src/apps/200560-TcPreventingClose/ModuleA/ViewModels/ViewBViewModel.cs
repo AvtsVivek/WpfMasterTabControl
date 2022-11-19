@@ -3,7 +3,7 @@ using SimplePrismShell.Core;
 
 namespace ModuleA.ViewModels
 {
-    public class ViewBViewModel : ViewModelBase
+    public class ViewBViewModel : ViewModelBase, IConfirmNavigationRequest
     {
         private string _welcomeMessage = "Hello from ViewBViewModel";
         public string WelcomeMessage
@@ -18,6 +18,11 @@ namespace ModuleA.ViewModels
         public override bool IsNavigationTarget(NavigationContext navigationContext)
         {
             return false;
+        }
+
+        public void ConfirmNavigationRequest(NavigationContext navigationContext, System.Action<bool> continuationCallback)
+        {
+            continuationCallback(false);
         }
     }
 }

@@ -18,8 +18,8 @@ namespace SimplePrismShell
             var args = parameter as RoutedEventArgs;
             if (args == null)
                 return;
-
             var child = args.OriginalSource as DependencyObject;
+
             var tabItem = FindParent<TabItem>(child!);
             if (tabItem == null)
                 return;
@@ -28,16 +28,52 @@ namespace SimplePrismShell
             if (tabControl == null)
                 return;
 
-            // tabControl.Items.Remove(tabItem.Content);
-            var region = RegionManager.GetObservableRegion(tabControl).Value;
+            IRegion region = RegionManager.GetObservableRegion(tabControl).Value;
             if (region == null)
                 return;
 
-            if (region.Views.Contains(tabItem.Content))
-                region.Remove(tabItem.Content);
+            RemoveItemFromRegion(tabItem.Content, region);
         }
 
-        private T FindParent<T>(DependencyObject child) where T : DependencyObject
+        private void RemoveItemFromRegion(object item, IRegion region)
+        {
+            var navigationContext = new NavigationContext(region.NavigationService, null);
+            if (CanRemove(item, navigationContext))
+            {
+                region.Remove(item);
+            }
+        }
+
+        private bool CanRemove(object item, NavigationContext navigationContext)
+        {
+            bool canRemove = true;
+
+            var confirmRequestItem = item as IConfirmNavigationRequest;
+            if (confirmRequestItem != null)
+            {
+                confirmRequestItem.ConfirmNavigationRequest(navigationContext, result =>
+                {
+                    canRemove = result;
+                });
+            }
+
+            var frameworkElement = item as FrameworkElement;
+            if (frameworkElement != null && canRemove)
+            {
+                var confirmRequestDataContext = frameworkElement.DataContext as IConfirmNavigationRequest;
+                if (confirmRequestDataContext != null)
+                {
+                    confirmRequestDataContext.ConfirmNavigationRequest(navigationContext, result =>
+                    {
+                        canRemove = result;
+                    });
+                }
+            }
+
+            return canRemove;
+        }
+
+        private static T FindParent<T>(DependencyObject child) where T : DependencyObject
         {
             DependencyObject parentObject = VisualTreeHelper.GetParent(child);
 
