@@ -1,16 +1,19 @@
-# Shows how to work with multiple shells.
-- So we need to do the following to fix the problems we discussed in the earlier example.
-- asdf
+# Basic example of Tab Control. 
+- How to add view to a tab in a tab control.
+- One approach is to use View discovery. This is not the right approach for at least two reasons. 
+- This example demonistrats the use of View discovery to add views to tabs.
+- The first problem is as you can see below, there is if else conditions for adding views to tab. THis is not ideal.
 
-
-- First add a behaviour class in SimplePrism.Core.Prism
-- Next add that behavior so prism will know about it. Override the method ConfigureDefaultRegionBehaviors in bootstrapper class. 
 ```cs
-protected override void ConfigureDefaultRegionBehaviors(IRegionBehaviorFactory regionBehaviors)
+void Navigate(string navigationPath)
 {
-    base.ConfigureDefaultRegionBehaviors(regionBehaviors);
-    regionBehaviors.AddIfMissing(RegionManagerAwareBehavior.BehaviorKey, typeof(RegionManagerAwareBehavior));
+    if(navigationPath == "ViewA")
+        _regionManager.RegisterViewWithRegion("TabRegion", typeof(ViewA));
+    if (navigationPath == "ViewB")
+        _regionManager.RegisterViewWithRegion("TabRegion", typeof(ViewB));
 }
 ```
-- Finally modify ViewAViewModel so that it will be RegionManagerAware. Impliment IRegionManagerAware interface. This means the view model will now use the RegionManager from the interface for navigation and not the global or root region manager. The global region manager is no longer needed, so remove it. Ctor injection should also be removed.
--  
+
+- The second problem is if I try to add an existing view which is already added to the tab control, we expect that the existing tab is shown up and the the same view is not added to the tab control by adding one more tab. This is not the case. 
+
+![Tab Control](./images/20TabControl20.jpg)
