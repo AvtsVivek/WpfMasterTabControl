@@ -23,7 +23,7 @@ namespace ModuleA
         public void OnInitialized(IContainerProvider containerProvider)
         {
             // The OnInitialized method will guarantee that the shell has been loaded and that the region has been created at this point
-            // _regionManager.RegisterViewWithRegion("TabRegion", typeof(ViewA));
+            _regionManager.RegisterViewWithRegion("TabRegion", typeof(ViewA));
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)

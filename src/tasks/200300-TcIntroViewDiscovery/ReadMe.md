@@ -17,3 +17,19 @@ void Navigate(string navigationPath)
 - The second problem is if I try to add an existing view which is already added to the tab control, we expect that the existing tab is shown up and the the same view is not added to the tab control by adding one more tab. This is not the case. 
 
 ![Tab Control](./images/20TabControl20.jpg)
+
+- The followiong are the steps
+- Make the tab control a region
+```xml
+<TabControl Grid.Row="1" prism:RegionManager.RegionName="TabRegion" />
+```
+
+- In the ModuelAModule class, register ViewA with tab region. So by this when the app is launched there will be a default tab with View A in it.
+
+```cs
+public void OnInitialized(IContainerProvider containerProvider)
+{
+    // The OnInitialized method will guarantee that the shell has been loaded and that the region has been created at this point
+    _regionManager.RegisterViewWithRegion("TabRegion", typeof(ViewA));
+}
+```
