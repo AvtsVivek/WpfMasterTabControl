@@ -25,3 +25,11 @@ xmlns:localViews="clr-namespace:SimplePrismShell.Views"
 ```
 
 - Now run the app and observe. 
+- There is a problem here.
+  - 1. Click Navigate A or Navigate B buttons a few times. 
+  - 2. Close a few tabs from the newly added tabs on the tab control.
+  - 3. Now click again the Navigate A or Navigate B buttons a few times.
+  - 4. This time notive that new tabs are not added to the tab control.
+- In this example, we saw how we can remove TabItems from the TabControl, and there is a problem. This is because when we're using Prism to inject views, we're injecting those views into a region, which is contained within a region manager. So what we have to solve, the next problem, is removing the views from the regions themselves. If we just remove the TabItem from the TabControl, those views still exist in the region, and therefore you may be thinking you're removing those views, but you're not, they're still in memory, still using resources so you have a memory leak. 
+- Step a head to the next example.
+
