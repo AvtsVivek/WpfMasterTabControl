@@ -23,5 +23,5 @@ public void OnNavigatedTo(NavigationContext navigationContext)
 
 ![Tab Control](./images/20TabControl20.jpg)
 
-- For passing parameters take a [look at this exmaple](https://github.com/AvtsVivek/LearnWpfPrism/tree/main/src/apps/200700-NavigationParmsStart).
+- For passing parameters take a [look at this exmaple](https://github.com/AvtsVivek/LearnWpfPrism/tree/main/src/apps/200700-NavigationParmsStart), the notes for the above [is here](https://github.com/AvtsVivek/LearnWpfPrism/tree/main/src/tasks/200700-NavigationParmsStart).
 
