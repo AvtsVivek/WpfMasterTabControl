@@ -10,5 +10,9 @@ namespace ModuleA.ViewModels
             get { return _welcomeMessage; }
             set { SetProperty(ref _welcomeMessage, value); }
         }
+        public ViewBViewModel()
+        {
+            Title = "View B";
+        }
     }
 }
