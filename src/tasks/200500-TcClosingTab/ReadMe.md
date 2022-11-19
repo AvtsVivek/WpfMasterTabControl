@@ -1,6 +1,6 @@
 # Basic example of Tab Control. 
 - Adding a close button to the tabs. 
-- Set a header template as follows for the shell window.
+- Set a header template as follows for the shell window. We are simply using existing wpf templating functionality
 
 ```xml
 <Setter Property="HeaderTemplate">
