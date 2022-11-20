@@ -9,6 +9,6 @@ namespace SimplePrismShell.Core
 {
     public interface IAllowCloseTheTab
     {
-        void ConfirmNavigationRequest(Action<bool> continuationCallback);
+        void CheckCloseTab(Action<bool> continuationCallback);
     }
 }

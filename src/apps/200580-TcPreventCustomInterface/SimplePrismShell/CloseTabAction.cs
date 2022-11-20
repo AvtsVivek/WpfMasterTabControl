@@ -54,7 +54,7 @@ namespace SimplePrismShell
             var confirmRequestItem = item as IAllowCloseTheTab;
             if (confirmRequestItem != null)
             {
-                confirmRequestItem.ConfirmNavigationRequest(result =>
+                confirmRequestItem.CheckCloseTab(result =>
                 {
                     canRemove = result;
                 });
@@ -66,7 +66,7 @@ namespace SimplePrismShell
                 var confirmRequestDataContext = frameworkElement.DataContext as IAllowCloseTheTab;
                 if (confirmRequestDataContext != null)
                 {
-                    confirmRequestDataContext.ConfirmNavigationRequest(result =>
+                    confirmRequestDataContext.CheckCloseTab(result =>
                     {
                         canRemove = result;
                     });

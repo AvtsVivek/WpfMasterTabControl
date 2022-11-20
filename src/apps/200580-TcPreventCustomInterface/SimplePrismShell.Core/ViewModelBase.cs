@@ -1,16 +1,21 @@
 ﻿using Prism.Mvvm;
 using Prism.Regions;
-
+using System;
 
 namespace SimplePrismShell.Core
 {
-    public class ViewModelBase : BindableBase, INavigationAware
+    public class ViewModelBase : BindableBase, INavigationAware, IAllowCloseTheTab
     {
         string _title = default!;
         public string Title
         {
             get { return _title; }
             set { SetProperty(ref _title, value); }
+        }
+
+        public virtual void CheckCloseTab(Action<bool> continuationCallback)
+        {
+            continuationCallback(true);
         }
 
         public virtual bool IsNavigationTarget(NavigationContext navigationContext)

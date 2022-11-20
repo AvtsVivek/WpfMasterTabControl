@@ -1,9 +1,10 @@
 ﻿using Prism.Regions;
 using SimplePrismShell.Core;
+using System;
 
 namespace ModuleA.ViewModels
 {
-    public class ViewBViewModel : ViewModelBase, IAllowCloseTheTab// IConfirmNavigationRequest
+    public class ViewBViewModel : ViewModelBase
     {
         private string _welcomeMessage = "Hello from ViewBViewModel";
         public string WelcomeMessage
@@ -19,15 +20,12 @@ namespace ModuleA.ViewModels
         {
             return false;
         }
-
-        //public void ConfirmNavigationRequest(NavigationContext navigationContext, System.Action<bool> continuationCallback)
-        //{
-        //    continuationCallback(false);
-        //}
-
-        public void ConfirmNavigationRequest(System.Action<bool> continuationCallback)
+        public override void CheckCloseTab(Action<bool> continuationCallback)
         {
-            continuationCallback(true);
+            // Set the following preventClose variable using what ever logic you see fit.
+            var preventClose = false;
+
+            continuationCallback(preventClose);
         }
     }
 }
