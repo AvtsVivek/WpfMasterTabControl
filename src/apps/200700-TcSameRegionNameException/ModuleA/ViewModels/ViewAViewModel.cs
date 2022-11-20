@@ -1,3 +1,4 @@
+using Prism.Commands;
 using Prism.Regions;
 using SimplePrismShell.Core;
 using System.Diagnostics;
@@ -13,14 +14,21 @@ namespace ModuleA.ViewModels
             set { SetProperty(ref _welcomeMessage, value); }
         }
 
-        public ViewAViewModel()
+        private readonly IRegionManager _regionManager;
+
+        public DelegateCommand<string> NavigateCommand { get; set; }
+
+        public ViewAViewModel(IRegionManager regionManager)
         {
+            _regionManager = regionManager;
+
             Title = "View A";
+            NavigateCommand = new DelegateCommand<string>(Navigate);
         }
 
-        public override bool IsNavigationTarget(NavigationContext navigationContext)
+        private void Navigate(string navigationPath)
         {
-            return false;
+            _regionManager.RequestNavigate("ChildRegion", navigationPath);
         }
     }
 }

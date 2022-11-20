@@ -31,7 +31,7 @@ namespace SimplePrismShell.ViewModels
             WindowTitle = "Main Shell Window";
             NavigateCommand = new DelegateCommand<string>(Navigate);
         }
-        void Navigate(string navigationPath)
+        private void Navigate(string navigationPath)
         {
             _regionManager.RequestNavigate("TabRegion", navigationPath);
         }

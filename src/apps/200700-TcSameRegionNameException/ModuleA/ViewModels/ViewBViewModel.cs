@@ -16,9 +16,5 @@ namespace ModuleA.ViewModels
         {
             Title = "View B";
         }
-        public override bool IsNavigationTarget(NavigationContext navigationContext)
-        {
-            return false;
-        }
     }
 }

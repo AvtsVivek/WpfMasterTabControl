@@ -13,19 +13,9 @@ namespace SimplePrismShell.Core
             set { SetProperty(ref _title, value); }
         }
 
-        public virtual void CheckCloseTab(Action<bool> continuationCallback)
-        {
-            continuationCallback(true);
-        }
-
-        public virtual bool CheckCloseTab()
-        {
-            return true;
-        }
-
         public virtual bool IsNavigationTarget(NavigationContext navigationContext)
         {
-            return true;
+            return false;
         }
 
         public virtual void OnNavigatedFrom(NavigationContext navigationContext)
