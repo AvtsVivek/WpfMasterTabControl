@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace SimplePrismShell.Core
 {
+
     //Here in this interface there are two method, but we need only one.
     //Accordingly the folloing method can be adjusted. Comment out one, and use just one.
     public interface IAllowCloseTheTab
