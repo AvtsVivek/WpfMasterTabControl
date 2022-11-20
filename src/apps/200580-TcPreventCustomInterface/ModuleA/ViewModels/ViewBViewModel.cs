@@ -27,5 +27,13 @@ namespace ModuleA.ViewModels
 
             continuationCallback(preventClose);
         }
+
+        public override bool CheckCloseTab()
+        {
+            // Set the following preventClose variable using what ever logic you see fit.
+            var preventClose = false;
+
+            return preventClose;
+        }
     }
 }

@@ -18,6 +18,11 @@ namespace SimplePrismShell.Core
             continuationCallback(true);
         }
 
+        public virtual bool CheckCloseTab()
+        {
+            return true;
+        }
+
         public virtual bool IsNavigationTarget(NavigationContext navigationContext)
         {
             return true;

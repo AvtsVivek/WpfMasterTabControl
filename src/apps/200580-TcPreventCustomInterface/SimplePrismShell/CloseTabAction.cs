@@ -52,25 +52,28 @@ namespace SimplePrismShell
             bool canRemove = true;
 
             var confirmRequestItem = item as IAllowCloseTheTab;
-            if (confirmRequestItem != null)
-            {
-                confirmRequestItem.CheckCloseTab(result =>
-                {
-                    canRemove = result;
-                });
-            }
+            canRemove = CheckCanRemove(canRemove, confirmRequestItem);
 
             var frameworkElement = item as FrameworkElement;
             if (frameworkElement != null && canRemove)
             {
                 var confirmRequestDataContext = frameworkElement.DataContext as IAllowCloseTheTab;
-                if (confirmRequestDataContext != null)
-                {
-                    confirmRequestDataContext.CheckCloseTab(result =>
-                    {
-                        canRemove = result;
-                    });
-                }
+                canRemove = CheckCanRemove(canRemove, confirmRequestDataContext);
+            }
+
+            return canRemove;
+        }
+
+        private static bool CheckCanRemove(bool canRemove, IAllowCloseTheTab? confirmRequestDataContext)
+        {
+            if (confirmRequestDataContext != null)
+            {
+                //confirmRequestDataContext.CheckCloseTab(result =>
+                //{
+                //    canRemove = result;
+                //});
+
+                canRemove = confirmRequestDataContext.CheckCloseTab();
             }
 
             return canRemove;
