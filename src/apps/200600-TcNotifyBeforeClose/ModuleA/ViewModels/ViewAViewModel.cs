@@ -1,5 +1,6 @@
 using Prism.Regions;
 using SimplePrismShell.Core;
+using System.Diagnostics;
 
 namespace ModuleA.ViewModels
 {
@@ -20,6 +21,17 @@ namespace ModuleA.ViewModels
         public override bool IsNavigationTarget(NavigationContext navigationContext)
         {
             return true;
+        }
+
+        public override void OnNavigatedFrom(NavigationContext navigationContext)
+        {
+            Debugger.Break(); // This method is called when the region is navigated away from this view.
+        }
+
+        public override void OnTabClose(NavigationContext navigationContext)
+        {
+            // In here, you can do something, before the tab gets closed.
+            Debugger.Break();// This method is called when the tab is being closed.
         }
     }
 }

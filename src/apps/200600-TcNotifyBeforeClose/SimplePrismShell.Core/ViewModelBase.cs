@@ -4,7 +4,7 @@ using System;
 
 namespace SimplePrismShell.Core
 {
-    public class ViewModelBase : BindableBase, INavigationAware, IAllowCloseTheTab
+    public class ViewModelBase : BindableBase, INavigationAware, IAllowCloseTheTab, INoitifyOnTabClose
     {
         string _title = default!;
         public string Title
@@ -28,12 +28,17 @@ namespace SimplePrismShell.Core
             return true;
         }
 
-        public void OnNavigatedFrom(NavigationContext navigationContext)
+        public virtual void OnNavigatedFrom(NavigationContext navigationContext)
         {
 
         }
 
         public void OnNavigatedTo(NavigationContext navigationContext)
+        {
+
+        }
+
+        public virtual void OnTabClose(NavigationContext navigationContext)
         {
 
         }

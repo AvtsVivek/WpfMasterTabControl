@@ -43,6 +43,10 @@ namespace SimplePrismShell
             var navigationContext = new NavigationContext(region.NavigationService, null);
             if (CanRemove(item, navigationContext))
             {
+                // Both of the following are not needed. Only one is needed. 
+                InvokeOnNavigatedFrom(item, navigationContext);
+                InvokeOnNavigatedFromCustom(item, navigationContext);
+
                 region.Remove(item);
             }
         }
@@ -72,11 +76,47 @@ namespace SimplePrismShell
                 //{
                 //    canRemove = result;
                 //});
+                
+                // Use above or below
 
                 canRemove = confirmRequestDataContext.CheckCloseTab();
             }
 
             return canRemove;
+        }
+
+        private void InvokeOnNavigatedFrom(object item, NavigationContext navigationContext)
+        {
+            var navigationAwareItem = item as INavigationAware;
+            if (navigationAwareItem != null)
+                navigationAwareItem.OnNavigatedFrom(navigationContext);
+
+            var frameworkElement = item as FrameworkElement;
+            if (frameworkElement != null)
+            {
+                var navigationAwareDataContext = frameworkElement.DataContext as INavigationAware;
+                if (navigationAwareDataContext != null)
+                {
+                    navigationAwareDataContext.OnNavigatedFrom(navigationContext);
+                }
+            }
+        }
+
+        private void InvokeOnNavigatedFromCustom(object item, NavigationContext navigationContext)
+        {
+            var navigationAwareItem = item as INoitifyOnTabClose;
+            if (navigationAwareItem != null)
+                navigationAwareItem.OnTabClose(navigationContext);
+
+            var frameworkElement = item as FrameworkElement;
+            if (frameworkElement != null)
+            {
+                var navigationAwareDataContext = frameworkElement.DataContext as INoitifyOnTabClose;
+                if (navigationAwareDataContext != null)
+                {
+                    navigationAwareDataContext.OnTabClose(navigationContext);
+                }
+            }
         }
 
         private T FindParent<T>(DependencyObject child) where T : DependencyObject
