@@ -78,3 +78,5 @@ private void Navigate(string navigationPath)
 }
 ```
 - Now run the app again and click the button in View A
+- So in summary what we need is access to scoped region manager in ViewAViewModel and not the global one. This will be delt with in the next example.
+- 
