@@ -58,4 +58,5 @@ public partial class ViewA : UserControl, ICreateRegionManagerScope
     }
 }
 ```
-- Now run the app
+- Now run the app. 
+- Now each ViewA will get its own new region manager. But there is a problem
