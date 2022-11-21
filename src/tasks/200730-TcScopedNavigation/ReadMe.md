@@ -59,4 +59,22 @@ public partial class ViewA : UserControl, ICreateRegionManagerScope
 }
 ```
 - Now run the app. 
-- Now each ViewA will get its own new region manager. But there is a problem
+- Now each ViewA will get its own new region manager. But there is a problem. It is as follows.
+- Each time a new instance of ViewA is created and injected into the tab control, a new region manage is created. 
+- But if you observe the views corresponding view model, ViewAViewModel, it has a dependency on region manager. And this region manager is supplied to this ViewAViewModel object via ctor injection. 
+- But the issue here is, the injected region is global one and not the newly crated region manager. So when you click the button on View A, it should create a new view B, but it does not. The global region manager does not have region by name ChildRegion. The global region manager has a region by name TabRegion. So it fails. This is fixed in the next example.
+- If you want to check, just change the region name in ViewAViewModel to TabRegion from ChildRegion as follows.
+```cs
+private void Navigate(string navigationPath)
+{
+    _regionManager.RequestNavigate("ChildRegion", navigationPath);
+}
+```
+to 
+```cs
+private void Navigate(string navigationPath)
+{
+    _regionManager.RequestNavigate("TabRegion", navigationPath);
+}
+```
+- Now run the app again and click the button in View A
