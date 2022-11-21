@@ -4,7 +4,7 @@ using SimplePrismShell.Core;
 
 namespace ModuleA.ViewModels
 {
-    public class ViewAViewModel : ViewModelBase
+    public class ViewAViewModel : ViewModelBase, IRegionManagerAware
     {
         private string _welcomeMessage = "Hello from ViewAViewModel";
         public string WelcomeMessage
@@ -12,22 +12,18 @@ namespace ModuleA.ViewModels
             get { return _welcomeMessage; }
             set { SetProperty(ref _welcomeMessage, value); }
         }
-
-        private readonly IRegionManager _regionManager;
-
         public DelegateCommand<string> NavigateCommand { get; set; }
+        public IRegionManager RegionManager { get; set; } = default!;
 
-        public ViewAViewModel(IRegionManager regionManager)
+        public ViewAViewModel()
         {
-            _regionManager = regionManager;
-
             Title = "View A";
             NavigateCommand = new DelegateCommand<string>(Navigate);
         }
 
         private void Navigate(string navigationPath)
         {
-            _regionManager.RequestNavigate("ChildRegion", navigationPath);
+            RegionManager.RequestNavigate("ChildRegion", navigationPath);
         }
     }
 }

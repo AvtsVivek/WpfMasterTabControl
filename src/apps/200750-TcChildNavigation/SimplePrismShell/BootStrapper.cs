@@ -25,7 +25,10 @@ namespace SimplePrismShell
         {
             moduleCatalog.AddModule<ModuleAModule>();
         }
-
-        
+        protected override void ConfigureDefaultRegionBehaviors(IRegionBehaviorFactory regionBehaviors)
+        {
+            base.ConfigureDefaultRegionBehaviors(regionBehaviors);
+            regionBehaviors.AddIfMissing(RegionManagerAwareBehavior.BehaviorKey, typeof(RegionManagerAwareBehavior));
+        }
     }
 }
